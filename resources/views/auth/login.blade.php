@@ -337,7 +337,7 @@
                     this.error = '';
 
                     try {
-                        const response = await fetch('{{ route("login.post") }}', {
+                        const response = await fetch('{{ route("login.post", [], false) }}', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',

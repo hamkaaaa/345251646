@@ -41,6 +41,7 @@ $defaultEnv = [
     'CACHE_STORE' => 'array',
     'QUEUE_CONNECTION' => 'sync',
     'LOG_CHANNEL' => 'stderr',
+    'ASSET_URL' => '/',
     'VIEW_COMPILED_PATH' => '/tmp/storage/framework/views',
     'APP_CONFIG_CACHE' => '/tmp/bootstrap/cache/config.php',
     'APP_EVENTS_CACHE' => '/tmp/bootstrap/cache/events.php',
@@ -55,6 +56,10 @@ foreach ($defaultEnv as $key => $value) {
         $_ENV[$key] = $value;
         $_SERVER[$key] = $value;
     }
+}
+
+if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
+    $_SERVER['HTTPS'] = 'on';
 }
 
 // 4. Register the Composer autoloader
