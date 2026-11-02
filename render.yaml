@@ -1,0 +1,36 @@
+# Render.com Blueprint — Melati V2 BPK
+# Deploy via: https://dashboard.render.com/select-repo?type=web
+
+services:
+  - type: web
+    name: melati-bpk
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    plan: free
+    healthCheckPath: /up
+    envVars:
+      - key: APP_NAME
+        value: "Melati BPK"
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      - key: APP_URL
+        sync: false # Will be set after deploy
+      - key: APP_KEY
+        generateValue: true
+      - key: DB_CONNECTION
+        value: sqlite
+      - key: SESSION_DRIVER
+        value: file
+      - key: CACHE_STORE
+        value: file
+      - key: QUEUE_CONNECTION
+        value: sync
+      - key: LOG_CHANNEL
+        value: stderr
+    disk:
+      name: melati-data
+      mountPath: /data
+      sizeGB: 1
